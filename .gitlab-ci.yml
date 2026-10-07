@@ -45,7 +45,7 @@ deploy:
   stage: deploy
   script:
     - cp $ENV_BACKEND backend/.env
-    - git pull https://gitlab.com/northwaykraston/SellPort && docker compose up --build
+    - git pull https://gitlab.com/northwaykraston/SellPort && docker compose up --build -d
 
 
   
