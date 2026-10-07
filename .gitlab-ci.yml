@@ -39,6 +39,7 @@ publish:
     - docker push suhofruct1k/sellport-frontend:$CI_COMMIT_SHORT_SHA
     - docker push suhofruct1k/sellport-backend:latest
     - docker push suhofruct1k/sellport-frontend:latest
+  needs: [build]
 
   
 
