@@ -43,12 +43,8 @@ publish:
 
 deploy:
   stage: deploy
-  before_script: 
-    - mkdir -p ~/.ssh && ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-    - eval $(ssh-agent -s) && echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
-    - scp "$ENV_BACKEND" $SSH_URL:SellPort/backend.env
-    - ssh $SSH_URL "cd SellPort && git pull && docker compose up --build -d"
+    - git pull & docker compose up --build
 
 
   
