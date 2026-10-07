@@ -42,7 +42,7 @@ publish:
   needs: [build]
 
 deploy:
-  stage: build
+  stage: deploy
   before_script: 
     - mkdir -p ~/.ssh && ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
     - eval $(ssh-agent -s) && echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
