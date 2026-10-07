@@ -1,0 +1,20 @@
+stages:
+  - test
+  - build
+  - deploy
+
+.uv-venv:
+  before_script:
+    - python -m venv .venv && source .venv/bin/activate && pip install uv
+
+lint:
+  stage: test
+  script:
+    - npm run lint
+
+test-api:
+  stage: test
+  extends:
+    - .uv-venv
+  script:
+    - cd backend && un sync --group dev && uv run pytest -q
