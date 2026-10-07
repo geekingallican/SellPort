@@ -25,10 +25,10 @@ build:
   script:
     - docker compose build
   after_script:
-    - docker tag sellport-backend-1 suhofruct1k/sellport-backend:$CI_COMMIT_SHORT_SHA
-    - docker tag sellport-frontend-1 suhofruct1k/sellport-frontend:$CI_COMMIT_SHORT_SHA
-    - docker tag sellport-backend-1 suhofruct1k/sellport-backend:latest
-    - docker tag sellport-frontend-1 suhofruct1k/sellport-frontend:latest
+    - docker tag sellport-backend suhofruct1k/sellport-backend:$CI_COMMIT_SHORT_SHA
+    - docker tag sellport-frontend suhofruct1k/sellport-frontend:$CI_COMMIT_SHORT_SHA
+    - docker tag sellport-backend suhofruct1k/sellport-backend:latest
+    - docker tag sellport-frontend suhofruct1k/sellport-frontend:latest
 
 publish:
   stage: build_and_publish
