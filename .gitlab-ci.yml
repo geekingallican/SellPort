@@ -17,7 +17,7 @@ test-api:
   extends:
     - .uv-venv
   script:
-    - cd backend && un sync --group dev && uv run pytest -q
+    - cd backend && uv sync --group dev && uv run pytest -q
   
 build:
   stage: build_and_publish
