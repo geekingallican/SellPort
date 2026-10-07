@@ -55,7 +55,6 @@ services:
       - ./backend/.env    
     volumes:
       - rustfs_data:/data
-    restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "wget --spider http://localhost:9000/health/live || curl -f http://localhost:9000/health/live || exit 1"]
       interval: 5s
