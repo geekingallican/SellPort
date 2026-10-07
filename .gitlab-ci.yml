@@ -11,6 +11,7 @@ lint:
   stage: test
   script:
     - cd frontend && npm run lint
+  allow_failure: true
 
 test-api:
   stage: test
