@@ -1,6 +1,7 @@
 services:
   backend:
     build: ./backend
+    restart: unless-stopped
     env_file: ./backend/.env
     command: sh -c "uv run alembic upgrade head && uv run uvicorn src.main:app --host 0.0.0.0 --port 8000"
     depends_on:
@@ -26,6 +27,7 @@ services:
     build: ./frontend
     ports:
       - 80:80
+    restart: unless-stopped
     depends_on:
       - backend
   redis:
@@ -45,6 +47,7 @@ services:
       timeout: 5s
   rustfs:
     image: rustfs/rustfs
+    restart: always
     ports:
       - "9000:9000"
       - "9001:9001"
