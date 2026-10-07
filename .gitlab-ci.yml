@@ -1,6 +1,6 @@
 stages:
   - test
-  - build
+  - build_and_publish
   - deploy
 
 .uv-venv:
@@ -18,3 +18,26 @@ test-api:
     - .uv-venv
   script:
     - cd backend && un sync --group dev && uv run pytest -q
+  
+build:
+  stage: build_and_publish
+  script:
+    - docker compose build
+  after_script:
+    - docker tag sellport-backend-1 suhofruct1k/sellport-backend:$CI_COMMIT_SHORT_SHA
+    - docker tag sellport-frontend-1 suhofruct1k/sellport-frontend:$CI_COMMIT_SHORT_SHA
+    - docker tag sellport-backend-1 suhofruct1k/sellport-backend:latest
+    - docker tag sellport-frontend-1 suhofruct1k/sellport-frontend:latest
+
+publish:
+  stage: build_and_publish
+  before_script:
+    - docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+  script:
+    - docker push suhofruct1k/sellport-backend:$CI_COMMIT_SHORT_SHA
+    - docker push suhofruct1k/sellport-frontend:$CI_COMMIT_SHORT_SHA
+    - docker push suhofruct1k/sellport-backend:latest
+    - docker push suhofruct1k/sellport-frontend:latest
+
+  
+
