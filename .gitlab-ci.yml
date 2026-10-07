@@ -47,7 +47,7 @@ deploy:
     - mkdir -p ~/.ssh && ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
     - eval $(ssh-agent -s) && echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
   script:
-    - ssh $SSH_URL "cd SellPort && git pull && cp $ENV_BACKEND backend/.env && docker compose up --build -d"
+    - ssh $SSH_URL "cd SellPort && git pull && cp $$ENV_BACKEND backend/.env && docker compose up --build -d"
 
 
   
