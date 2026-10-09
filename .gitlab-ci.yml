@@ -9,10 +9,11 @@ stages:
 
 lint:
   stage: test
-  before_script:
-    
   script:
-    - cd frontend && npm ci && npm run lint
+    - cd frontend
+    - rm -rf node_modules package-lock.json
+    - npm install
+    - npm run lint
   allow_failure: true
 
 test-api:
