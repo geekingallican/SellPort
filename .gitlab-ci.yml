@@ -47,7 +47,6 @@ build:
     - docker tag sellport-frontend suhofruct1k/sellport-frontend:$CI_COMMIT_SHORT_SHA
     - docker tag sellport-backend suhofruct1k/sellport-backend:latest
     - docker tag sellport-frontend suhofruct1k/sellport-frontend:latest
-  needs: [test-api]
 
 publish:
   stage: build_and_publish
@@ -58,7 +57,6 @@ publish:
     - docker push suhofruct1k/sellport-frontend:$CI_COMMIT_SHORT_SHA
     - docker push suhofruct1k/sellport-backend:latest
     - docker push suhofruct1k/sellport-frontend:latest
-  needs: [build]
 
 deploy:
   stage: deploy
