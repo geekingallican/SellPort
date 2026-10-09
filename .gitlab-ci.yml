@@ -37,6 +37,7 @@ test-api:
   script:
     - cd backend && uv sync --group dev && uv run pytest -q
   needs: []
+  
 build:
   stage: build_and_publish
   script:
