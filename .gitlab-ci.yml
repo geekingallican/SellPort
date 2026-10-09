@@ -10,10 +10,9 @@ stages:
 lint:
   stage: test
   before_script:
-    - cd frontend
-    - npm ci
+    
   script:
-    - npm run lint
+    - cd frontend && npm ci && npm run lint
   allow_failure: true
 
 test-api:
