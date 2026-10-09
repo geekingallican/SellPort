@@ -3,6 +3,19 @@ stages:
   - build_and_publish
   - deploy
 
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+.test-rules:
+  rules:
+    - changes:
+      - "**/*.py"
+      - "**/*.json"
+      when: on_success
+    - when: never
+
 .uv-venv:
   before_script:
     - python -m venv .venv && source .venv/bin/activate && pip install uv
@@ -14,14 +27,16 @@ lint:
     - npm ci
     - npm run lint
   allow_failure: true
+  extends: .test-rules
 
 test-api:
   stage: test
   extends:
     - .uv-venv
+    - .test-rules
   script:
     - cd backend && uv sync --group dev && uv run pytest -q
-  
+  needs: []
 build:
   stage: build_and_publish
   script:
@@ -31,6 +46,7 @@ build:
     - docker tag sellport-frontend suhofruct1k/sellport-frontend:$CI_COMMIT_SHORT_SHA
     - docker tag sellport-backend suhofruct1k/sellport-backend:latest
     - docker tag sellport-frontend suhofruct1k/sellport-frontend:latest
+  needs: [test-api]
 
 publish:
   stage: build_and_publish
@@ -48,6 +64,10 @@ deploy:
   script:
     - cp $ENV_BACKEND backend/.env
     - git pull https://gitlab.com/northwaykraston/SellPort && docker compose up --build -d
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+      allow_failure: true
 
 
   
