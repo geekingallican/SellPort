@@ -16,7 +16,14 @@ workflow:
 #       - "**/*.json"
 #       when: on_success
 #     - when: never
-
+# .backend-rules:
+#    rules:
+#      - changes:
+#        - "backend/**/*"
+# .frontend-rules:
+#    rules:
+#      - changes:
+#        - "frontend/**/*"
 .uv-venv:
   before_script:
     - python3 -m venv .venv && source .venv/bin/activate && pip install uv
