@@ -46,7 +46,7 @@ services:
     ports:
       - "80:80"
     restart: unless-stopped
-    depends_on:
+    depends_on: 
       - backend
   redis:
     image: redis:alpine
