@@ -37,7 +37,7 @@ services:
       - VALIDATION=duckdns
       - DUCKDNSTOKEN=17c49571-4c53-4123-a90e-f362f9bc8b83
     volumes:
-      - ./swag-config:/config
+      - /opt/sellport/swag-config:/config
     ports:
       - 443:443
     restart: unless-stopped
