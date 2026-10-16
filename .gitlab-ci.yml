@@ -28,13 +28,13 @@ lint:
     - npm ci
     - npm run lint
   allow_failure: true
-  extends: .test-rules
+#  extends: .test-rules
 
 test-api:
   stage: test
   extends:
     - .uv-venv
-    - .test-rules
+#    - .test-rules
   script:
     - cd backend && uv sync --group dev && uv run pytest -q
   needs: []
