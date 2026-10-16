@@ -19,7 +19,7 @@ workflow:
 
 .uv-venv:
   before_script:
-    - python -m venv .venv && source .venv/bin/activate && pip install uv
+    - python3 -m venv .venv && source .venv/bin/activate && pip install uv
 
 lint:
   stage: test
