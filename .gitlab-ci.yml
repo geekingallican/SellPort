@@ -24,7 +24,6 @@ workflow:
 lint:
   stage: test
   script:
-    - npm install -g npm@latest
     - cd frontend
     - npm ci
     - npm run lint
