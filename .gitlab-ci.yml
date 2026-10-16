@@ -6,15 +6,16 @@ stages:
 workflow:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
-.test-rules:
-  rules:
-    - changes:
-      - "**/*.py"
-      - "**/*.json"
-      when: on_success
-    - when: never
+# .test-rules:
+#   rules:
+#     - changes:
+#       - "**/*.py"
+#       - "**/*.json"
+#       when: on_success
+#     - when: never
 
 .uv-venv:
   before_script:
