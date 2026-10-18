@@ -34,7 +34,6 @@ lint:
     - cd frontend
     - npm ci
     - npm run lint
-  allow_failure: true
 #  extends: .test-rules
 
 test-api:
@@ -50,7 +49,6 @@ build:
   stage: build_and_publish
   script:
     - docker compose build
-  after_script:
     - docker tag sellport-backend suhofruct1k/sellport-backend:$CI_COMMIT_SHORT_SHA
     - docker tag sellport-frontend suhofruct1k/sellport-frontend:$CI_COMMIT_SHORT_SHA
     - docker tag sellport-backend suhofruct1k/sellport-backend:latest
@@ -59,7 +57,7 @@ build:
 publish:
   stage: build_and_publish
   before_script:
-    - docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
   script:
     - docker push suhofruct1k/sellport-backend:$CI_COMMIT_SHORT_SHA
     - docker push suhofruct1k/sellport-frontend:$CI_COMMIT_SHORT_SHA
