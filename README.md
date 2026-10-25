@@ -1,6 +1,11 @@
 # SellPort — маркетплейс
 
+MY PART IS ONLY backend/Dockerfile, frontend/Dockerfile, docker-compose.yml, .gitlab-ci.yml
+EVERYTHING ELSE IS PART OF DEVELOPER WHO GAVE ME THE PROJECT TO ME
+
 ## Описание проекта
+
+
 
 SellPort — веб-приложение для просмотра и управления товарами, категориями, пользователями и заказами.
 
